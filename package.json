@@ -1,0 +1,21 @@
+{
+  "name": "genesis-jump",
+  "version": "0.0.0",
+  "description": "Exported from Spritulus",
+  "type": "module",
+  "author": "Spritulus",
+  "scripts": {
+    "dev": "vite --config vite/config.dev.mjs",
+    "build": "vite build --config vite/config.prod.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "phaser": "^3.90.0",
+    "phaser-virtual-joystick": "^0.3.1"
+  },
+  "devDependencies": {
+    "terser": "^5.44.1",
+    "vite": "^6.4.1"
+  }
+}
