@@ -6,7 +6,7 @@ export class level1 extends Scene {
         this.WIDTH = 1280;
         this.HEIGHT = 720;
         this.TEXT_STYLE = {
-            fontFamily: 'Arial Black',
+            fontFamily: 'Arial Black, Sans-Serif',
             fontSize: 36,
             color: '#ffffff',
             stroke: '#000000',
@@ -87,12 +87,12 @@ export class level1 extends Scene {
                         targets: this.instructions,
                         duration: 500,
                         ease: 'Power2',
-                        opacity: 0,
+                        alpha: 0,
                         onComplete: () => {
                             this.instructions.destroy();
                         }
                     });
-                }, 3000);
+                }, 4000);
             }
         });
     }
@@ -108,13 +108,7 @@ export class level1 extends Scene {
             this.bgLayer2.tilePositionX += this.gameSpeed - 1;
             this.bgLayer3.tilePositionX += this.gameSpeed;
 
-            // Clouds Effect
-            this.clouds.getChildren().forEach(cloud => {
-                cloud.x -= 0.5;
-                if (cloud.getBounds().right < 0) {
-                    cloud.x = this.WIDTH;
-                }
-            })
+            
 
             // Obstacles
             this.respawnTime += this.gameSpeed;
@@ -196,7 +190,6 @@ export class level1 extends Scene {
         this.physics.add.existing(this.belowGround);
         this.belowGround.body.setImmovable();
         this.bgLayer0 = this.add.tileSprite(0, 0, this.WIDTH, this.HEIGHT, 'part-jungle-forest-background').setOrigin(0, 0);
-        this.createClouds();
         this.bgLayer1 = this.add.tileSprite(0, 0, this.WIDTH, this.HEIGHT, 'part-jungle-jungle').setOrigin(0, 0);
         this.bgLayer2 = this.add.tileSprite(0, 0, this.WIDTH, this.HEIGHT, 'part-jungle-tropical-underbrush').setOrigin(0, 0);
         this.bgLayer3 = this.add.tileSprite(0, 0, this.WIDTH, this.HEIGHT, 'part-jungle-path-with-grass').setOrigin(0, 0);
@@ -215,14 +208,6 @@ export class level1 extends Scene {
     }
 
     
-    createClouds () {
-        this.clouds = this.add.group();
-        for (let i = 0; i < 3; i++) {
-            const x = Phaser.Math.Between(0, this.WIDTH),
-                y = Phaser.Math.Between(this.HEIGHT / 3, this.HEIGHT / 2);
-            this.clouds.add(this.add.image(x, y, 'cloud' + (Phaser.Math.Between(0, 1) ? '2' : '')));
-        }
-    }
 
     placeObstacle () {
         let obstacle;

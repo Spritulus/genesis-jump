@@ -7,7 +7,7 @@ export class MenuBasic extends Scene {
         this.WIDTH = 1280;
         this.HEIGHT = 720;
         this.TEXT_STYLE = {
-            fontFamily: 'Arial Black',
+            fontFamily: 'Arial Black, Sans-Serif',
             fontSize: 36,
             color: '#ffffff',
             stroke: '#000000',
@@ -229,63 +229,66 @@ export class MenuBasic extends Scene {
         if (!this.parentScene.updateMobileCursor) return;
 
         if (this.sys.game.device.os.android || this.sys.game.device.os.iOS) {
-            this.joystick = new VirtualJoystick({
-                scene: this,
-                enableWithoutTouch: true,
-                baseArea: {
-                    fillColor: 0x888888,
-                    strokeColor: 0x000000,
-                },
-                stick: {
-                    fillColor: 0x888888,
-                    strokeColor: 0x000000,
-                },
-                deadZone: {
-                    fillColor: 0x888888,
-                    strokeColor: 0x000000
-                }
-            });
+            const needsJoystick = typeof this.parentScene.OBSTACLE_TIME === 'undefined'; // If the scene has OBSTACLE_TIME, it's an endless scroller and doesn't need a joystick
+            if (needsJoystick) {
+                this.joystick = new VirtualJoystick({
+                    scene: this,
+                    enableWithoutTouch: true,
+                    baseArea: {
+                        fillColor: 0x888888,
+                        strokeColor: 0x000000,
+                    },
+                    stick: {
+                        fillColor: 0x888888,
+                        strokeColor: 0x000000,
+                    },
+                    deadZone: {
+                        fillColor: 0x888888,
+                        strokeColor: 0x000000
+                    }
+                });
 
-            this.add.existing(this.joystick);
-            this.joystick.on('press', () => {
-                console.log('Joystick pressed');
-            });
-            this.joystick.on('release', () => {
-                this.parentScene.updateMobileCursor();
-            });
-            this.joystick.on('move', (data) => {
-                if (data.y < -0.6 && Math.abs(data.x) < 0.4) {
-                    this.parentScene.updateMobileCursor('up', true);
-                } else {
-                    this.parentScene.updateMobileCursor('up', false);
-                }
-                    
-                if (data.x > 0.4) {
-                    this.parentScene.updateMobileCursor('right', true);
-                } else {
-                    this.parentScene.updateMobileCursor('right', false);
-                }
+                this.add.existing(this.joystick);
+                this.joystick.on('press', () => {
+                    console.log('Joystick pressed');
+                });
+                this.joystick.on('release', () => {
+                    this.parentScene.updateMobileCursor();
+                });
+                this.joystick.on('move', (data) => {
+                    if (data.y < -0.6 && Math.abs(data.x) < 0.4) {
+                        this.parentScene.updateMobileCursor('up', true);
+                    } else {
+                        this.parentScene.updateMobileCursor('up', false);
+                    }
+                        
+                    if (data.x > 0.4) {
+                        this.parentScene.updateMobileCursor('right', true);
+                    } else {
+                        this.parentScene.updateMobileCursor('right', false);
+                    }
 
-                if (data.x < -0.4) {
-                    this.parentScene.updateMobileCursor('left', true);
-                } else {
-                    this.parentScene.updateMobileCursor('left', false);
-                }
+                    if (data.x < -0.4) {
+                        this.parentScene.updateMobileCursor('left', true);
+                    } else {
+                        this.parentScene.updateMobileCursor('left', false);
+                    }
 
-                if (data.y > 0.6 && Math.abs(data.x) < 0.4) {
-                    this.parentScene.updateMobileCursor('down', true);
-                } else {
-                    this.parentScene.updateMobileCursor('down', false);
-                }
-            });
+                    if (data.y > 0.6 && Math.abs(data.x) < 0.4) {
+                        this.parentScene.updateMobileCursor('down', true);
+                    } else {
+                        this.parentScene.updateMobileCursor('down', false);
+                    }
+                });
+            }
 
-            this.upperButton = this.add.rectangle(this.WIDTH/2, 0, this.WIDTH/2, this.HEIGHT/2, 0x000000, 0).setOrigin(0, 0).setInteractive();
+            this.upperButton = this.add.rectangle(needsJoystick ? this.WIDTH/2 : 0, 0, needsJoystick ?  this.WIDTH/2 : this.WIDTH, this.HEIGHT/2, 0x000000, 0).setOrigin(0, 0).setInteractive();
             this.upperButton.on('pointerdown', (data) => {
-                this.touchCircle = this.add.circle(data.x, data.y, 64, 0xffffff, 0.5);
+                this.touchCircle = this.add.circle(data.x, data.y, 64, 0xffffff, 0.6);
                 this.tweens.add({
                     targets: this.touchCircle,
                     alpha: 0,
-                    duration: 500,
+                    duration: 600,
                     onComplete: () => {
                         this.touchCircle.destroy();
                     }
@@ -296,7 +299,7 @@ export class MenuBasic extends Scene {
                 this.parentScene.handleMobileActionButton(false);
             });
 
-            this.lowerButton = this.add.rectangle(this.WIDTH/2, this.HEIGHT/2, this.WIDTH/2, this.HEIGHT/2, 0x000000, 0).setOrigin(0, 0).setInteractive();
+            this.lowerButton = this.add.rectangle(needsJoystick ? this.WIDTH/2 : 0, this.HEIGHT/2, needsJoystick ? this.WIDTH/2 : this.WIDTH, this.HEIGHT/2, 0x000000, 0).setOrigin(0, 0).setInteractive();
             this.lowerButton.on('pointerdown', (data) => {
                 this.touchCircle = this.add.circle(data.x, data.y, 64, 0xffffff, 0.5);
                 this.tweens.add({

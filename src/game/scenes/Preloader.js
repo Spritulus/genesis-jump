@@ -23,10 +23,13 @@ export class Preloader extends Scene {
     }
 
     preload () {
-        this.load.setPath('assets');
+        this.load.setPath('assets/');
         
         // Spritulus Logo
-        this.load.svg('spritulus-logo', 'spritulus-logo.svg');
+        this.load.svg('spritulus-logo', 'spritulus-logo.svg', {
+            width: 144,
+            height: 144
+        });
 
         // Pause-Play Icons
         this.load.svg('pause-icon', 'pause-icon.svg');
@@ -37,11 +40,6 @@ export class Preloader extends Scene {
             height: 500,
             width: 500
         });
-        
-        // Scene Effect - Clouds
-        this.load.svg('cloud', 'cloud.svg');
-        this.load.svg('cloud2', 'cloud2.svg');
-
         // Characters
         this.load.spritesheet(
             'character-adam',

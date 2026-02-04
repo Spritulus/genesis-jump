@@ -6,7 +6,7 @@ export class Home extends Scene {
         this.WIDTH = 1280;
         this.HEIGHT = 720;
         this.TEXT_STYLE = {
-            fontFamily: 'Arial Black',
+            fontFamily: 'Arial Black, Sans-Serif',
             fontSize: 36,
             color: '#ffffff',
             stroke: '#000000',
@@ -43,7 +43,6 @@ export class Home extends Scene {
 
     createEnvironment() {
         this.bgLayer0 = this.add.tileSprite(0, 0, this.WIDTH, this.HEIGHT, 'part-jungle-forest-background').setOrigin(0, 0);
-        this.createClouds();
         this.bgLayer1 = this.add.tileSprite(0, 0, this.WIDTH, this.HEIGHT, 'part-jungle-jungle').setOrigin(0, 0);
         this.bgLayer2 = this.add.tileSprite(0, 0, this.WIDTH, this.HEIGHT, 'part-jungle-tropical-underbrush').setOrigin(0, 0);
         this.bgLayer3 = this.add.tileSprite(0, 0, this.WIDTH, this.HEIGHT, 'part-jungle-path-with-grass').setOrigin(0, 0);
@@ -56,14 +55,6 @@ export class Home extends Scene {
         this.bgLayer3.tilePositionX += this.gameSpeed;
     }
     
-    createClouds () {
-        this.clouds = this.add.group();
-        for (let i = 0; i < 3; i++) {
-            const x = Phaser.Math.Between(0, this.WIDTH),
-                y = Phaser.Math.Between(this.HEIGHT / 3, this.HEIGHT / 2);
-            this.clouds.add(this.add.image(x, y, 'cloud' + (Phaser.Math.Between(0, 1) ? '2' : '')));
-        }
-    }
 
     createMenu () {
         const options = [
@@ -83,7 +74,7 @@ export class Home extends Scene {
 
     getMenuItems (options) {
         const menuItems = [
-                this.add.image(0, -72, 'logo').setOrigin(0.5)
+                this.add.image(0, -88, 'logo').setOrigin(0.5)
             ],
             scene = this;
 
@@ -147,8 +138,8 @@ export class Home extends Scene {
     createLogo () {
         this.spritulusLogoContainer = this.add.container();
         this.spritulusLogo = this.add.image(0, 0, 'spritulus-logo').setScale(0.5);
-        this.spritulusText = this.add.text(16, this.HEIGHT - 32, 'Made with Spritulus', {
-            fontFamily: 'Arial',
+        this.spritulusText = this.add.text(16, this.HEIGHT - 40, 'Made with Spritulus', {
+            fontFamily: 'Arial, Sans-Serif',
             fontSize: 18,
             color: '#ffffff'
         });
