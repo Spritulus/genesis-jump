@@ -32,13 +32,13 @@ export class Preloader extends Scene {
         });
 
         // Pause-Play Icons
-        this.load.svg('pause-icon', 'pause-icon.svg');
-        this.load.svg('play-icon', 'play-icon.svg');
+        this.load.svg('pause-icon', 'pause-icon.svg', { width: 144, height: 144 });
+        this.load.svg('play-icon', 'play-icon.svg', { width: 144, height: 144 });
         
         // Game Logo
         this.load.svg('logo', 'logo.svg', {
-            height: 500,
-            width: 500
+            height: 640,
+            width: 640
         });
         // Characters
         this.load.spritesheet(
@@ -55,8 +55,20 @@ export class Preloader extends Scene {
 
         // Elements
         this.load.spritesheet(
-            'element-aloe-vera',
-            'element-aloe-vera.png',
+            'element-basic-bush',
+            'element-basic-bush.png',
+            { frameWidth: 200, frameHeight: 200 }
+        );
+
+        this.load.spritesheet(
+            'element-grassy-clump',
+            'element-grassy-clump.png',
+            { frameWidth: 200, frameHeight: 200 }
+        );
+
+        this.load.spritesheet(
+            'element-grassy-clump-2',
+            'element-grassy-clump-2.png',
             { frameWidth: 200, frameHeight: 200 }
         );
 

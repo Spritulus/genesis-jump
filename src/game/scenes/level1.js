@@ -111,27 +111,32 @@ export class level1 extends Scene {
             
 
             // Obstacles
-            this.respawnTime += this.gameSpeed;
-            if (this.respawnTime >= Phaser.Math.Between(this.OBSTACLE_TIME, this.OBSTACLE_TIME + 150)) {
-                this.respawnTime = 0;
-                this.placeObstacle();
+        this.respawnTime += this.gameSpeed;
+        if (this.respawnTime >= Phaser.Math.Between(this.OBSTACLE_TIME, this.OBSTACLE_TIME + 150)) {
+            this.respawnTime = 0;
+            this.placeObstacle();
+        }
+        this.obstacles.getChildren().forEach(obstacle => {
+            obstacle.x -= this.gameSpeed;
+            if (obstacle.getBounds().right < 0) {
+                obstacle.destroy();
             }
-            this.obstacles.getChildren().forEach(obstacle => {
-                obstacle.x -= this.gameSpeed;
-                if (obstacle.getBounds().right < 0) {
-                    obstacle.destroy();
-                }
-            });
+        });
             
             // Player Jump
             if (this.player.body.onFloor()) {
                 if (jump) {
                     this.player.anims.stop();
                     this.player.setVelocityY(-1800);
-                    this.player.play(this.playerKey + '-jump-flipped', true);
                 } else {
                     this.player.play(this.playerKey + '-move-flipped', true);
                 }
+            }
+
+            if (this.player.body.velocity.y > 0) {
+                this.player.play(this.playerKey + '-fall' + (this.playerIsFlipped ? '-flipped' : ''), true);
+            } else if (this.player.body.velocity.y < 0) {
+                this.player.play(this.playerKey + '-jump' + (this.playerIsFlipped ? '-flipped' : ''), true);
             }
 
         }
@@ -202,7 +207,16 @@ export class level1 extends Scene {
         this.player.play(this.playerKey + '-idle' + (this.playerIsFlipped ? '-flipped' : ''), true);
         
         this.physics.add.collider(this.player, this.belowGround);
-        this.physics.add.overlap(this.player, this.obstacles, () => {
+        this.physics.add.overlap(this.player, this.obstacles, (player, obstacle) => {
+            player.play(this.playerKey + '-take-hit' + (this.playerIsFlipped ? '-flipped' : ''), true);
+            player.on('animationcomplete', () => {
+                player.play(this.playerKey + '-death' + (this.playerIsFlipped ? '-flipped' : ''), true);
+            });
+            
+            obstacle.play(obstacle.texture.key.replace('element-', '') + '-attack-1', true);
+            obstacle.on('animationcomplete', () => {
+                obstacle.play(obstacle.texture.key.replace('element-', '') + '-idle', true);
+            });
             this.stopGame('Game Over');
         });
     }
@@ -210,16 +224,32 @@ export class level1 extends Scene {
     
 
     placeObstacle () {
-        let obstacle;
-        const obstacleNum = Phaser.Math.Between(0, 0);
-        
-        if (obstacleNum === 0) {
-            obstacle = this.obstacles.create(this.WIDTH, this.GROUND_LEVEL - 154, 'element-aloe-vera');
-            obstacle.setSize(105, 86, true).setOffset(50, 68);
-            obstacle.play('aloe-vera-idle', true);
-        }
 
-        obstacle.setOrigin(0,0).setImmovable();
+        if (this.isGameRunning) {
+            let obstacle;
+            const obstacleNum = Phaser.Math.Between(0, 2);
+            
+            if (obstacleNum === 0) {
+                obstacle = this.obstacles.create(this.WIDTH, this.GROUND_LEVEL - 195, 'element-basic-bush');
+                obstacle.setSize(159, 104, true).setOffset(22, 91);
+                obstacle.play('basic-bush-idle', true);
+                
+            } else 
+            if (obstacleNum === 1) {
+                obstacle = this.obstacles.create(this.WIDTH, this.GROUND_LEVEL - 191, 'element-grassy-clump');
+                obstacle.setSize(64, 107, true).setOffset(68, 84);
+                obstacle.play('grassy-clump-idle', true);
+                
+            } else 
+            if (obstacleNum === 2) {
+                obstacle = this.obstacles.create(this.WIDTH, this.GROUND_LEVEL - 191, 'element-grassy-clump-2');
+                obstacle.setSize(84, 107, true).setOffset(56, 84);
+                obstacle.play('grassy-clump-2-idle', true);
+                
+            }
+
+            obstacle.setOrigin(0,0).setImmovable();
+        }
     }
 
     // Mobile Controls Handlers
