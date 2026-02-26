@@ -174,21 +174,33 @@ export class Home extends Scene {
             });
             this.anims.create({
                 key: 'adam-idle-flipped',
-                frames: this.anims.generateFrameNumbers('character-adam', { start: 21, end: 28 }),
+                frames: this.anims.generateFrameNumbers('character-adam', { start: 23, end: 30 }),
                 frameRate: 8,
                 repeat: -1
             });
             this.anims.create({
                 key: 'adam-move',
-                frames: this.anims.generateFrameNumbers('character-adam', { start: 17, end: 20 }),
+                frames: this.anims.generateFrameNumbers('character-adam', { start: 19, end: 22 }),
                 frameRate: 8,
                 repeat: -1
             });
             this.anims.create({
                 key: 'adam-move-flipped',
-                frames: this.anims.generateFrameNumbers('character-adam', { start: 38, end: 41 }),
+                frames: this.anims.generateFrameNumbers('character-adam', { start: 42, end: 45 }),
                 frameRate: 8,
                 repeat: -1
+            });
+            this.anims.create({
+                key: 'adam-jump',
+                frames: this.anims.generateFrameNumbers('character-adam', { start: 17, end: 18 }),
+                frameRate: 8,
+                repeat: 0
+            });
+            this.anims.create({
+                key: 'adam-jump-flipped',
+                frames: this.anims.generateFrameNumbers('character-adam', { start: 40, end: 41 }),
+                frameRate: 8,
+                repeat: 0
             });
             this.anims.create({
                 key: 'adam-fall',
@@ -198,7 +210,7 @@ export class Home extends Scene {
             });
             this.anims.create({
                 key: 'adam-fall-flipped',
-                frames: this.anims.generateFrameNumbers('character-adam', { start: 36, end: 37 }),
+                frames: this.anims.generateFrameNumbers('character-adam', { start: 38, end: 39 }),
                 frameRate: 8,
                 repeat: 0
             });
@@ -210,7 +222,7 @@ export class Home extends Scene {
             });
             this.anims.create({
                 key: 'adam-death-flipped',
-                frames: this.anims.generateFrameNumbers('character-adam', { start: 29, end: 35 }),
+                frames: this.anims.generateFrameNumbers('character-adam', { start: 31, end: 37 }),
                 frameRate: 8,
                 repeat: 0
             });
@@ -222,21 +234,33 @@ export class Home extends Scene {
             });
             this.anims.create({
                 key: 'eve-idle-flipped',
-                frames: this.anims.generateFrameNumbers('character-eve', { start: 21, end: 28 }),
+                frames: this.anims.generateFrameNumbers('character-eve', { start: 23, end: 30 }),
                 frameRate: 8,
                 repeat: -1
             });
             this.anims.create({
                 key: 'eve-move',
-                frames: this.anims.generateFrameNumbers('character-eve', { start: 17, end: 20 }),
+                frames: this.anims.generateFrameNumbers('character-eve', { start: 19, end: 22 }),
                 frameRate: 8,
                 repeat: -1
             });
             this.anims.create({
                 key: 'eve-move-flipped',
-                frames: this.anims.generateFrameNumbers('character-eve', { start: 38, end: 41 }),
+                frames: this.anims.generateFrameNumbers('character-eve', { start: 42, end: 45 }),
                 frameRate: 8,
                 repeat: -1
+            });
+            this.anims.create({
+                key: 'eve-jump',
+                frames: this.anims.generateFrameNumbers('character-eve', { start: 17, end: 18 }),
+                frameRate: 8,
+                repeat: 0
+            });
+            this.anims.create({
+                key: 'eve-jump-flipped',
+                frames: this.anims.generateFrameNumbers('character-eve', { start: 40, end: 41 }),
+                frameRate: 8,
+                repeat: 0
             });
             this.anims.create({
                 key: 'eve-fall',
@@ -246,7 +270,7 @@ export class Home extends Scene {
             });
             this.anims.create({
                 key: 'eve-fall-flipped',
-                frames: this.anims.generateFrameNumbers('character-eve', { start: 36, end: 37 }),
+                frames: this.anims.generateFrameNumbers('character-eve', { start: 38, end: 39 }),
                 frameRate: 8,
                 repeat: 0
             });
@@ -258,7 +282,7 @@ export class Home extends Scene {
             });
             this.anims.create({
                 key: 'eve-death-flipped',
-                frames: this.anims.generateFrameNumbers('character-eve', { start: 29, end: 35 }),
+                frames: this.anims.generateFrameNumbers('character-eve', { start: 31, end: 37 }),
                 frameRate: 8,
                 repeat: 0
             });
@@ -318,43 +342,43 @@ export class Home extends Scene {
             });
             this.anims.create({
                 key: 'grassy-clump-idle-flipped',
-                frames: this.anims.generateFrameNumbers('element-grassy-clump', { start: 34, end: 44 }),
+                frames: this.anims.generateFrameNumbers('element-grassy-clump', { start: 30, end: 40 }),
                 frameRate: 8,
                 repeat: -1
             });
             this.anims.create({
                 key: 'grassy-clump-attack-1',
-                frames: this.anims.generateFrameNumbers('element-grassy-clump', { start: 11, end: 21 }),
+                frames: this.anims.generateFrameNumbers('element-grassy-clump', { start: 23, end: 29 }),
                 frameRate: 8,
                 repeat: 0
             });
             this.anims.create({
                 key: 'grassy-clump-attack-1-flipped',
-                frames: this.anims.generateFrameNumbers('element-grassy-clump', { start: 45, end: 55 }),
+                frames: this.anims.generateFrameNumbers('element-grassy-clump', { start: 53, end: 59 }),
                 frameRate: 8,
                 repeat: 0
             });
             this.anims.create({
                 key: 'grassy-clump-take-hit',
-                frames: this.anims.generateFrameNumbers('element-grassy-clump', { start: 22, end: 32 }),
+                frames: this.anims.generateFrameNumbers('element-grassy-clump', { start: 11, end: 21 }),
                 frameRate: 8,
                 repeat: 0
             });
             this.anims.create({
                 key: 'grassy-clump-take-hit-flipped',
-                frames: this.anims.generateFrameNumbers('element-grassy-clump', { start: 56, end: 66 }),
+                frames: this.anims.generateFrameNumbers('element-grassy-clump', { start: 41, end: 51 }),
                 frameRate: 8,
                 repeat: 0
             });
             this.anims.create({
                 key: 'grassy-clump-death',
-                frames: this.anims.generateFrameNumbers('element-grassy-clump', { start: 33, end: 33 }),
+                frames: this.anims.generateFrameNumbers('element-grassy-clump', { start: 22, end: 22 }),
                 frameRate: 8,
                 repeat: 0
             });
             this.anims.create({
                 key: 'grassy-clump-death-flipped',
-                frames: this.anims.generateFrameNumbers('element-grassy-clump', { start: 67, end: 67 }),
+                frames: this.anims.generateFrameNumbers('element-grassy-clump', { start: 52, end: 52 }),
                 frameRate: 8,
                 repeat: 0
             });

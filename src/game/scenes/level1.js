@@ -209,9 +209,6 @@ export class level1 extends Scene {
         this.physics.add.collider(this.player, this.belowGround);
         this.physics.add.overlap(this.player, this.obstacles, (player, obstacle) => {
             player.play(this.playerKey + '-take-hit' + (this.playerIsFlipped ? '-flipped' : ''), true);
-            player.on('animationcomplete', () => {
-                player.play(this.playerKey + '-death' + (this.playerIsFlipped ? '-flipped' : ''), true);
-            });
             
             obstacle.play(obstacle.texture.key.replace('element-', '') + '-attack-1', true);
             obstacle.on('animationcomplete', () => {
